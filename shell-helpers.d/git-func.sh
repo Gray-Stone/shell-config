@@ -1,6 +1,6 @@
+#! /bin/sh
 
-
-function GitPull {
+GitPull () {
   (
     set -vx 
     cur_head="$(git rev-parse --abbrev-ref HEAD)"
@@ -8,7 +8,7 @@ function GitPull {
   )
 }
 
-function GitPush {
+GitPush () {
   (
     set -vx 
     cur_head="$(git rev-parse --abbrev-ref HEAD)"

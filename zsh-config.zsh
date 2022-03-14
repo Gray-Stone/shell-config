@@ -1,3 +1,4 @@
+#! /bin/zsh
 
 # SHELL_CONFIG_DIR this need to point to the repo folder this file is in. The scirpt rely on this 
 # to find relative file location
@@ -44,8 +45,14 @@ fi
 
 
 ######################################
-#special fix for systemd 
+# special fix for systemd 
 _systemctl_unit_state() {
   typeset -gA _sys_unit_state
   _sys_unit_state=( $(__systemctl list-unit-files "$PREFIX*" | awk '{print $1, $2}') ) }
+######################################
+
+
+######################################
+# Source my custom helper 
+source setup-shell-helpers.sh
 ######################################
