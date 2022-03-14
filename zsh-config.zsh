@@ -54,5 +54,5 @@ _systemctl_unit_state() {
 
 ######################################
 # Source my custom helper 
-source setup-shell-helpers.sh
+source ${SHELL_CONFIG_DIR}/setup-shell-helpers.sh
 ######################################
