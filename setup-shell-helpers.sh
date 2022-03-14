@@ -5,4 +5,4 @@
 
 [ -z ${SHELL_CONFIG_DIR+x} ] && SHELL_CONFIG_DIR="$(dirname $(realpath $0))"
 
-. "${SHELL_CONFIG_DIR}/shell-helpers.d/git-helper-func.sh"
+. "${SHELL_CONFIG_DIR}/shell-helpers.d/git-func.sh"
