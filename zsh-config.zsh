@@ -32,7 +32,7 @@ source $ZSH/oh-my-zsh.sh
 ######################################
 # SSH related settings 
 
-export EDITOR='micro' # always default to micro first
+export EDITOR='${HOME}/micro' # always default to micro first
 # Setting for using editor
 if [[ -z ${SSH_CONNECTION+x} ]]; then
   # Case of non ssh, try to use vscode as editor
