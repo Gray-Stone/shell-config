@@ -22,9 +22,9 @@ else:
 journal_cmd=""
 if args.action in ["start" , "restart" , "status"]:
   if args.user :
-    journal_cmd = f"journalctl --user -n 25 -fu {args.unit}"
+    journal_cmd = f"journalctl --user -n 25 -fu {args.unit} -o cat"
   else:
-    journal_cmd = f"sudo journalctl -n 25 -fu {args.unit}"
+    journal_cmd = f"sudo journalctl -n 25 -fu {args.unit} -o cat"
 
 print(f"""
 SYS_CTL_CMD="{sys_cmd}"
