@@ -6,10 +6,12 @@
 
 
 if [ -z ${SHELL_CONFIG_DIR+x} ] ; then 
-    SHELL_HELPER_DIR="$(dirname $(realpath $0))"
+    SHELL_HELPER_DIR="$(dirname $(realpath $0))"/shell-helpers.d
 else 
     SHELL_HELPER_DIR=${SHELL_CONFIG_DIR}/shell-helpers.d
 fi 
 
 . "${SHELL_HELPER_DIR}/git-func.sh"
 . "${SHELL_HELPER_DIR}/systemd-func.sh"
+
+alias pssh="parallel-ssh"
