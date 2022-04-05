@@ -87,3 +87,15 @@ function s-u.cat () {
   sysc -u cat "$@"
 }
 
+function sys-run () {
+  set -xv
+  echo "$RED running $GREEN $1 $RED with $GREEN ${@:2} $NC"
+  UNIT_NAME="$1_$(date +%b%d_%H:%M:%S)"
+  systemd-run --user --unit "${UNIT_NAME}" --property=KillSignal=SIGINT --remain-after-exit    /bin/zsh -c " source ~/.zshrc ; sleep 1 ; ${*} "
+  if tty -s ; then 
+    journalctl --user -fu ${UNIT_NAME} -o cat
+  else 
+    sleep 2
+    journalctl --user -u ${UNIT_NAME} -o cat -n 100
+  fi 
+}
