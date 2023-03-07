@@ -51,6 +51,16 @@ _systemctl_unit_state() {
   _sys_unit_state=( $(__systemctl list-unit-files "$PREFIX*" | awk '{print $1, $2}') ) }
 ######################################
 
+######################################
+# Seems like zsh doesnt auto add ~/.local/bin
+# set PATH so it includes user's private ~/.local/bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+######################################
+
+
+
 
 ######################################
 # Source my custom helper 
