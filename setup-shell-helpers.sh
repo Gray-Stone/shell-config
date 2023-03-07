@@ -13,5 +13,6 @@ fi
 
 . "${SHELL_HELPER_DIR}/git-func.sh"
 . "${SHELL_HELPER_DIR}/systemd-func.sh"
+. "${SHELL_HELPER_DIR}/misc-func.sh"
 
 alias pssh="parallel-ssh"
