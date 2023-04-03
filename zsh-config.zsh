@@ -16,7 +16,7 @@ antigen init ${SHELL_CONFIG_DIR}/antigenrc
 #########################################
 # These are settings for oh my zsh
 
-export ZSH="/home/$USER/.oh-my-zsh"
+export ZSH="${HOME}/.oh-my-zsh"
 
 ZSH_THEME_RANDOM_CANDIDATES=(
     "avit" "bira" "fishy" "gnzh")
