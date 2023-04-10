@@ -66,3 +66,15 @@ fi
 # Source my custom helper 
 source ${SHELL_CONFIG_DIR}/setup-shell-helpers.sh
 ######################################
+
+
+######################################
+# Configure and Enable CD history.
+# source: https://unix.stackexchange.com/a/157773
+setopt AUTO_PUSHD                  # pushes the old directory onto the stack
+# PushHD Minus is a matter of persional taste, and I don't think this change anything on my machine.
+# setopt PUSHD_MINUS                 # exchange the meanings of '+' and '-'
+setopt CDABLE_VARS                 # expand the expression (allows 'cd -2/<subfolder>')
+autoload -U compinit && compinit   # load + start completion
+zstyle ':completion:*:directory-stack' list-colors '=(#b) #([0-9]#)*( *)==95=38;5;12'
+######################################
