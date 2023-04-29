@@ -28,7 +28,6 @@ COMPLETION_WAITING_DOTS="true"
 source $ZSH/oh-my-zsh.sh
 ######################################
 
-
 ######################################
 # Configure and Enable CD history.
 # source: https://unix.stackexchange.com/a/157773
@@ -40,9 +39,17 @@ autoload -U compinit && compinit   # load + start completion
 zstyle ':completion:*:directory-stack' list-colors '=(#b) #([0-9]#)*( *)==95=38;5;12'
 ######################################
 
+######################################
+# special fix for systemd 
+_systemctl_unit_state() {
+  typeset -gA _sys_unit_state
+  _sys_unit_state=( $(__systemctl list-unit-files "$PREFIX*" | awk '{print $1, $2}') ) }
+######################################
+
+
 
 ######################################
-# SSH related settings 
+# External tools, changing system editor/pager/etc
 
 export EDITOR='${HOME}/micro' # always default to micro first
 # Setting for using editor
@@ -53,35 +60,32 @@ else
   # Case of ssh connection
   LIBGL_ALWAYS_INDIRECT=1
 fi
+
+# Change pager to most if it exists
+if type most > /dev/null; then
+  export PAGER="most"
+fi
+
+# enable mcfly
+eval "$(mcfly init zsh)"
+
 ######################################
 
-
-######################################
-# special fix for systemd 
-_systemctl_unit_state() {
-  typeset -gA _sys_unit_state
-  _sys_unit_state=( $(__systemctl list-unit-files "$PREFIX*" | awk '{print $1, $2}') ) }
 ######################################
 
-######################################
+# Section for adding additional PATH.
+
 # Seems like zsh doesnt auto add ~/.local/bin
 # set PATH so it includes user's private ~/.local/bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-######################################
-
-
-######################################
-# Add paths
 
 # Specific one for rust cargo
-source "$HOME/.cargo/env"
-######################################
+if [ -f "$HOME/.cargo/env" ] ; then
+  source "$HOME/.cargo/env"
+fi
 
-######################################
-# enable mcfly
-eval "$(mcfly init zsh)"
 ######################################
 
 ######################################
