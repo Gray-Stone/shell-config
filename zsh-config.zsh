@@ -67,8 +67,9 @@ if type most > /dev/null; then
 fi
 
 # enable mcfly
-eval "$(mcfly init zsh)"
-
+if type most > /dev/null; then
+  eval "$(mcfly init zsh)"
+fi 
 ######################################
 
 ######################################
