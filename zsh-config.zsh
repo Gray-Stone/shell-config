@@ -37,6 +37,22 @@ setopt AUTO_PUSHD                  # pushes the old directory onto the stack
 setopt CDABLE_VARS                 # expand the expression (allows 'cd -2/<subfolder>')
 autoload -U compinit && compinit   # load + start completion
 zstyle ':completion:*:directory-stack' list-colors '=(#b) #([0-9]#)*( *)==95=38;5;12'
+
+
+# Config No glob match behavior. I want it more like bash, pass the glob down.
+
+# Source: https://superuser.com/a/982399
+# This change the default NOMATCH to off, 
+# and pass the glob down instead of throwing error
+setopt NO_NOMATCH 
+
+
+# Short cuts to remember:
+
+# ctrl q : push-input - push the entire input (multi-line) onto a stach. And pop back into 
+# command prompt after a command
+# explain: https://sgeb.io/posts/bash-zsh-half-typed-commands/
+
 ######################################
 
 ######################################
