@@ -95,13 +95,18 @@ fi
 # Seems like zsh doesnt auto add ~/.local/bin
 # set PATH so it includes user's private ~/.local/bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+  PATH="$HOME/.local/bin:$PATH"
 fi
 
 # Specific one for rust cargo
 if [ -f "$HOME/.cargo/env" ] ; then
   source "$HOME/.cargo/env"
 fi
+
+# Add emcas bin folder if exits
+if [ -d "$HOME/.config/emacs/bin" ] ; then 
+  PATH="$HOME/.config/emacs/bin:$PATH"
+fi 
 
 ######################################
 
