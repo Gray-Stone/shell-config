@@ -11,8 +11,9 @@ else
     SHELL_HELPER_DIR=${SHELL_CONFIG_DIR}/shell-helpers.d
 fi 
 
+. "${SHELL_HELPER_DIR}/base-setup-func.sh"
+
 . "${SHELL_HELPER_DIR}/git-func.sh"
 . "${SHELL_HELPER_DIR}/systemd-func.sh"
 . "${SHELL_HELPER_DIR}/misc-func.sh"
 
-alias pssh="parallel-ssh"

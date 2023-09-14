@@ -63,15 +63,23 @@ _systemctl_unit_state() {
 ######################################
 
 
+######################################
+# Source my custom helper 
+# These need to be sourced early so I can use the inner functions
+source ${SHELL_CONFIG_DIR}/setup-shell-helpers.sh
+######################################
+
 
 ######################################
 # External tools, changing system editor/pager/etc
 
-export EDITOR='${HOME}/micro' # always default to micro first
+export EDITOR='micro' # always default to micro first
 # Setting for using editor
 if [[ -z ${SSH_CONNECTION+x} ]]; then
-  # Case of non ssh, try to use vscode as editor
-  [ -n $(command -v code) ] && export EDITOR='code --wait' 
+  # # Case of non ssh, try to use vscode as editor
+  # [ -n $(command -v code) ] && export EDITOR='code --wait'
+   # 
+   export EDITOR='micro'
 else
   # Case of ssh connection
   LIBGL_ALWAYS_INDIRECT=1
@@ -110,8 +118,11 @@ fi
 
 ######################################
 
+
 ######################################
-# Source my custom helper 
-source ${SHELL_CONFIG_DIR}/setup-shell-helpers.sh
+# Alias 
+
+alias pssh="parallel-ssh"
+alias bat="batcat"
 ######################################
 
