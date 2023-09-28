@@ -126,3 +126,12 @@ alias pssh="parallel-ssh"
 alias bat="batcat"
 ######################################
 
+
+######################################
+# Additional notes:
+
+# To get python arg completion, the following packages are needed 
+# argcomplete
+# Then this command needs to be executed to register into zshenv `activate-global-python-argcomplete`
+
+######################################
