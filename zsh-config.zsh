@@ -136,4 +136,7 @@ alias bat="batcat"
 # argcomplete
 # Then this command needs to be executed to register into zshenv `activate-global-python-argcomplete`
 
+# To get rclone tab complete, 
+# sudo rclone genautocomplete zsh
+# Also if not done before, `/usr/share/zsh/vendor-completions` folder needs to be manually created.
 ######################################
