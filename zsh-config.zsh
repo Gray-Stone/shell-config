@@ -91,7 +91,7 @@ if type most > /dev/null; then
 fi
 
 # enable mcfly
-if type most > /dev/null; then
+if type mcfly > /dev/null; then
   eval "$(mcfly init zsh)"
   export MCFLY_FUZZY=2
   export MCFLY_RESULTS=30
