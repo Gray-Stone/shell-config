@@ -13,3 +13,11 @@ source_if_exists () {
         fi
     fi
 }
+
+# Add file to path if exists
+
+add_path_if_exists(){
+    if [ -d "${1}" ] ; then
+        PATH="${1}:$PATH"
+    fi
+}
