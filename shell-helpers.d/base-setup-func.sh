@@ -8,8 +8,10 @@ source_if_exists () {
         . "${1}"
 
         # Echo if second argumentis true
+        # Having strange bug when calling this inside another script that also get 
+        # called by this. Seems like the arguments affects each other.
         if "${2}" ; then 
-            echo -e "\e[32m File { ${1} } is sourced \e[0m"
+            echo -e "\e[32m File [ ${1} ] is sourced \e[0m"
         fi
     fi
 }
