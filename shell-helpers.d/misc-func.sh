@@ -5,6 +5,6 @@ function cursor-back(){
 }
 
 
-alias rsync_remote_partial="rsync --stats --compress --partial --append-verify --progress"
+alias rsync_remote_partial="rsync --stats --compress --partial --append-verify --progress --human-readable"
 
 alias to-clip="xclip -selection clipboard"
