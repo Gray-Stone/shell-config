@@ -14,22 +14,34 @@ antigen init ${SHELL_CONFIG_DIR}/antigenrc
 
 
 #########################################
-# These are settings for oh my zsh
 
-export ZSH="${HOME}/.oh-my-zsh"
+# Theme setup. 
 
-ZSH_THEME_RANDOM_CANDIDATES=(
-    "avit" "bira" "fishy" "gnzh")
-ZSH_THEME=random
+# fpath+=($SHELL_CONFIG_DIR/pure)
+# autoload -U promptinit; promptinit
+# prompt pure
 
-HYPHEN_INSENSITIVE="true"
-COMPLETION_WAITING_DOTS="true"
+LP_PATH_METHOD="truncate_chars_from_dir_middle"
+LP_ENABLE_TIME=1
+LP_ENABLE_TEMP=0
 
-source $ZSH/oh-my-zsh.sh
-######################################
+#########################################
+
+
+#########################################
+# History settings.
+
+source ${SHELL_CONFIG_DIR}/history_setup.zsh
+
+#########################################
+
 
 ######################################
 # Configure and Enable CD history.
+
+setopt AUTO_CD # the option for cd without typing cd
+
+
 # source: https://unix.stackexchange.com/a/157773
 setopt AUTO_PUSHD                  # pushes the old directory onto the stack
 # PushHD Minus is a matter of persional taste, and I don't think this change anything on my machine.
@@ -38,15 +50,6 @@ setopt CDABLE_VARS                 # expand the expression (allows 'cd -2/<subfo
 autoload -U compinit && compinit   # load + start completion
 zstyle ':completion:*:directory-stack' list-colors '=(#b) #([0-9]#)*( *)==95=38;5;12'
 
-
-# Config No glob match behavior. I want it more like bash, pass the glob down.
-
-# Source: https://superuser.com/a/982399
-# This change the default NOMATCH to off, 
-# and pass the glob down instead of throwing error
-setopt NO_NOMATCH 
-
-
 # Short cuts to remember:
 
 # ctrl q : push-input - push the entire input (multi-line) onto a stach. And pop back into 
@@ -54,6 +57,62 @@ setopt NO_NOMATCH
 # explain: https://sgeb.io/posts/bash-zsh-half-typed-commands/
 
 ######################################
+
+
+#########################################
+# Setup for promp styling. 
+
+bindkey -e # This set the keymapping style to emacs.
+
+## replaces  HYPHEN_INSENSITIVE="true"
+zstyle ':completion:*' matcher-list '' 'm:{-_}={_-}'
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # This makes matching case in-sensitive
+
+zstyle ':completion:*' completer _expand _complete _ignored _match _approximate _prefix
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' menu select=1
+zstyle ':completion:*' prompt 'potentional of %e error detected'
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' substitute 1
+
+
+## This is replacement for COMPLETION_WAITING_DOTS="true"
+# Print dots when ZSH is generating completeion options.
+# AI generated code.
+expand-or-complete-with-dots() {
+  echo -n "\e[31m...\e[0m"   # Print red dots
+  zle expand-or-complete      # Call the default completion
+  zle redisplay               # Refresh the prompt
+}
+zle -N expand-or-complete-with-dots
+bindkey "^I" expand-or-complete-with-dots   # Bind Tab to the new widget
+
+
+
+setopt COMPLETE_IN_WORD
+setopt ALWAYS_TO_END
+setopt LONG_LIST_JOBS
+setopt INTERACTIVE_COMMENTS # Allow comments # be used in interactive shell
+
+# Source: https://superuser.com/a/982399
+# This change the default NOMATCH to off, 
+# and pass the glob down instead of throwing error
+setopt NO_NOMATCH 
+
+
+######################################
+
+# All setting related to the promp itself and zsh internal settings are done !
+
+autoload -Uz compinit
+compinit
+
 
 ######################################
 # special fix for systemd 
@@ -126,6 +185,7 @@ fi
 
 alias pssh="parallel-ssh"
 alias bat="batcat"
+alias ls='ls --color=auto' # This adds good color to ls output
 ######################################
 
 

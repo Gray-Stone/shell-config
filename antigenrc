@@ -1,6 +1,4 @@
 # Antigen module lists
-# Use Oh-My-Zsh
-antigen use oh-my-zsh
 
 antigen bundle git
 antigen bundle z
@@ -10,6 +8,9 @@ antigen bundle command-not-found
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle zdharma-continuum/fast-syntax-highlighting
+
+# LiquidPrompt theme
+antigen bundle liquidprompt/liquidprompt
 
 antigen apply
 
