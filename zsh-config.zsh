@@ -47,7 +47,7 @@ setopt AUTO_PUSHD                  # pushes the old directory onto the stack
 # PushHD Minus is a matter of persional taste, and I don't think this change anything on my machine.
 # setopt PUSHD_MINUS                 # exchange the meanings of '+' and '-'
 setopt CDABLE_VARS                 # expand the expression (allows 'cd -2/<subfolder>')
-autoload -U compinit && compinit   # load + start completion
+
 zstyle ':completion:*:directory-stack' list-colors '=(#b) #([0-9]#)*( *)==95=38;5;12'
 
 # Short cuts to remember:
@@ -64,10 +64,20 @@ zstyle ':completion:*:directory-stack' list-colors '=(#b) #([0-9]#)*( *)==95=38;
 
 bindkey -e # This set the keymapping style to emacs.
 
-## replaces  HYPHEN_INSENSITIVE="true"
-zstyle ':completion:*' matcher-list '' 'm:{-_}={_-}'
+# These are for ctrl+arrow key
+bindkey '\e[1;5C' forward-word   # Ctrl+Right
+bindkey '\e[1;5D' backward-word  # Ctrl+Left
 
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # This makes matching case in-sensitive
+bindkey '\e[H'  beginning-of-line   # Home
+bindkey '\e[F'  end-of-line         # End
+
+
+## replaces  HYPHEN_INSENSITIVE="true"
+
+zstyle ':completion:*' matcher-list \
+  'm:{a-z}={A-Z}' \
+  'r:|=*' \
+  'm:{-_}={_-}'
 
 zstyle ':completion:*' completer _expand _complete _ignored _match _approximate _prefix
 zstyle ':completion:*' completions 1
