@@ -60,7 +60,7 @@ zstyle ':completion:*:directory-stack' list-colors '=(#b) #([0-9]#)*( *)==95=38;
 
 
 #########################################
-# Setup for promp styling. 
+# Key binding setup
 
 bindkey -e # This set the keymapping style to emacs.
 
@@ -71,6 +71,57 @@ bindkey '\e[1;5D' backward-word  # Ctrl+Left
 bindkey '\e[H'  beginning-of-line   # Home
 bindkey '\e[F'  end-of-line         # End
 
+
+# Copied from on my zsh
+
+# [Delete] - delete forward
+if [[ -n "${terminfo[kdch1]}" ]]; then
+  bindkey "${terminfo[kdch1]}" delete-char
+else
+  bindkey "^[[3~" delete-char
+
+  bindkey "^[3;5~" delete-char
+fi
+# [Ctrl-Delete] - delete whole forward-word
+bindkey '^[[3;5~' kill-word
+
+# Start typing + [Up-Arrow] - fuzzy find history forward
+autoload -U up-line-or-beginning-search
+zle -N up-line-or-beginning-search
+
+bindkey "^[[A" up-line-or-beginning-search
+if [[ -n "${terminfo[kcuu1]}" ]]; then
+  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+
+# Start typing + [Down-Arrow] - fuzzy find history backward
+autoload -U down-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+bindkey "^[[B" down-line-or-beginning-search
+if [[ -n "${terminfo[kcud1]}" ]]; then
+  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
+
+# [Shift-Tab] - move through the completion menu backwards
+if [[ -n "${terminfo[kcbt]}" ]]; then
+  bindkey "${terminfo[kcbt]}" reverse-menu-complete
+fi
+## This is replacement for COMPLETION_WAITING_DOTS="true"
+# Print dots when ZSH is generating completeion options.
+# AI generated code.
+expand-or-complete-with-dots() {
+  echo -n "\e[31m...\e[0m"   # Print red dots
+  zle expand-or-complete      # Call the default completion
+  zle redisplay               # Refresh the prompt
+}
+zle -N expand-or-complete-with-dots
+bindkey "^I" expand-or-complete-with-dots   # Bind Tab to the new widget
+
+
+
+
+# Setup for promp styling. 
 
 ## replaces  HYPHEN_INSENSITIVE="true"
 
@@ -90,19 +141,6 @@ zstyle ':completion:*' menu select=1
 zstyle ':completion:*' prompt 'potentional of %e error detected'
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' substitute 1
-
-
-## This is replacement for COMPLETION_WAITING_DOTS="true"
-# Print dots when ZSH is generating completeion options.
-# AI generated code.
-expand-or-complete-with-dots() {
-  echo -n "\e[31m...\e[0m"   # Print red dots
-  zle expand-or-complete      # Call the default completion
-  zle redisplay               # Refresh the prompt
-}
-zle -N expand-or-complete-with-dots
-bindkey "^I" expand-or-complete-with-dots   # Bind Tab to the new widget
-
 
 
 setopt COMPLETE_IN_WORD
