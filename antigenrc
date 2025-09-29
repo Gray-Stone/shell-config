@@ -1,7 +1,7 @@
 # Antigen module lists
 
 antigen bundle git
-antigen bundle z
+antigen bundle agkozak/zsh-z
 antigen bundle pip
 antigen bundle history
 antigen bundle command-not-found

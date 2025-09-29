@@ -10,6 +10,7 @@
 # Setup antigen
 source ${SHELL_CONFIG_DIR}/antigen.zsh
 antigen init ${SHELL_CONFIG_DIR}/antigenrc
+
 #########################################
 
 
@@ -47,9 +48,6 @@ setopt AUTO_PUSHD                  # pushes the old directory onto the stack
 # PushHD Minus is a matter of persional taste, and I don't think this change anything on my machine.
 # setopt PUSHD_MINUS                 # exchange the meanings of '+' and '-'
 setopt CDABLE_VARS                 # expand the expression (allows 'cd -2/<subfolder>')
-
-zstyle ':completion:*:directory-stack' list-colors '=(#b) #([0-9]#)*( *)==95=38;5;12'
-
 # Short cuts to remember:
 
 # ctrl q : push-input - push the entire input (multi-line) onto a stach. And pop back into 
@@ -142,6 +140,9 @@ zstyle ':completion:*' prompt 'potentional of %e error detected'
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' substitute 1
 
+zstyle ':completion:*:directory-stack' list-colors '=(#b) #([0-9]#)*( *)==95=38;5;12'
+
+
 
 setopt COMPLETE_IN_WORD
 setopt ALWAYS_TO_END
@@ -159,6 +160,7 @@ setopt NO_NOMATCH
 # All setting related to the promp itself and zsh internal settings are done !
 
 autoload -Uz compinit
+
 compinit
 
 
