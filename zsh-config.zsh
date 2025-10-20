@@ -234,7 +234,11 @@ fi
 # Alias 
 
 alias pssh="parallel-ssh"
-alias bat="batcat"
+
+if type batcat > /dev/null; then
+  alias bat="batcat"
+fi 
+
 alias ls='ls --color=auto' # This adds good color to ls output
 ######################################
 
